@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 export const client = new ApolloClient({
-  uri: '',
+  uri: import.meta.env.VITE_API_URI,
   cache: new InMemoryCache(),
 });
