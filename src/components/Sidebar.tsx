@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
 
-import type { LessonType } from '@/enums/LessonType';
+import { Lesson } from '@/components/Lesson';
 
-import { Lesson } from './Lesson';
+import type { LessonType } from '@/enums/LessonType';
 
 type GetLessonsQueryResponse = {
   lessons: {
