@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { CheckCircle, Lock } from 'phosphor-react';
 import { format, isPast } from 'date-fns';
 import ptBr from 'date-fns/locale/pt-BR';
@@ -30,9 +31,9 @@ export function Lesson({ title, slug, type, availableAt }: LessonProps) {
       >
         {capitalizedAvailableDate}
       </time>
-      <a
+      <Link
         className="block p-4 border border-gray-500 rounded hover:border-green-500"
-        href={slug}
+        to={`/event/lesson/${slug}`}
       >
         <header className="flex items-center justify-between mb-4">
           {isLessonAvailable ? (
@@ -57,7 +58,7 @@ export function Lesson({ title, slug, type, availableAt }: LessonProps) {
           </span>
         </header>
         <strong>{title}</strong>
-      </a>
+      </Link>
     </li>
   );
 }
