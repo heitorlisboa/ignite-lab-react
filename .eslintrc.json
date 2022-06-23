@@ -28,8 +28,8 @@
         "newlinesBetween": "always",
         "groups": [
           "module",
+          "/^@/(?!(lib|utils|enums))/",
           "/^@//",
-          "//(lib|utils)/",
           ["parent", "sibling", "index"]
         ]
       }
