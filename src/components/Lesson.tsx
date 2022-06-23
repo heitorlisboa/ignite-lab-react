@@ -30,7 +30,10 @@ export function Lesson({ title, slug, type, availableAt }: LessonProps) {
       >
         {capitalizedAvailableDate}
       </time>
-      <a className="block p-4 border border-gray-500 rounded" href={slug}>
+      <a
+        className="block p-4 border border-gray-500 rounded hover:border-green-500"
+        href={slug}
+      >
         <header className="flex items-center justify-between mb-4">
           {isLessonAvailable ? (
             <span className="text-blue-500 text-sm font-medium flex gap-2 items-center">
