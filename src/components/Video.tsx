@@ -6,6 +6,7 @@ import '@vime/core/themes/default.css';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
+import { Footer } from '@/components/Footer';
 
 const GET_LESSON_BY_SLUG_QUERY = gql`
   query GetLessonBySlug($slug: String) {
@@ -76,7 +77,7 @@ export function Video({ lessonSlug }: VideoProps) {
         </div>
       </div>
 
-      <div className="p-8 mx-auto">
+      <div className="p-8 mx-auto mb-12">
         <div className="flex gap-16 items-start mb-20">
           <div className="flex-1">
             <h1 className="text-2xl font-bold mb-4">{data.lesson.title}</h1>
@@ -124,6 +125,8 @@ export function Video({ lessonSlug }: VideoProps) {
           </Card>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
