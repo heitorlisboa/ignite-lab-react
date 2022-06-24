@@ -1,9 +1,12 @@
-export function LogoIgniteLab() {
+type LogoIgniteLabProps = {
+  className?: string;
+};
+
+export function LogoIgniteLab({ className }: LogoIgniteLabProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="237"
-      height="34"
+      className={className}
       fill="none"
       viewBox="0 0 237 34"
     >

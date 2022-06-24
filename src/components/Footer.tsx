@@ -2,7 +2,7 @@ import { LogoRocketseat } from '@/components/LogoRocketseat';
 
 export function Footer() {
   return (
-    <footer className="text-gray-300 flex gap-6 items-center py-8 mx-8 border-t border-gray-500">
+    <footer className="text-gray-300 flex gap-6 items-center py-6 mx-6 border-t border-gray-500">
       <a href="https://www.rocketseat.com.br" target="_blank" rel="noreferrer">
         <LogoRocketseat />
       </a>
