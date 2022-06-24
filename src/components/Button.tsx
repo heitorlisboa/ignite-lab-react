@@ -1,9 +1,11 @@
-import type { PropsWithChildren } from 'react';
+import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
 type ButtonProps = PropsWithChildren<{
   as?: 'a' | 'button';
   variant?: 'filled' | 'outlined';
   href?: string;
+  buttonType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  buttonDisabled?: boolean;
 }>;
 
 type ButtonStyles = {
@@ -15,6 +17,8 @@ export function Button({
   as: Element = 'button',
   variant = 'filled',
   href,
+  buttonType = 'button',
+  buttonDisabled,
 }: ButtonProps) {
   const styles: ButtonStyles = {
     filled: 'bg-green-500 text-white hover:bg-green-700',
@@ -30,12 +34,14 @@ export function Button({
   return (
     <Element
       href={Element === 'a' ? href : undefined}
+      type={Element === 'button' ? buttonType : undefined}
+      disabled={Element === 'button' ? buttonDisabled : undefined}
       className={[
         `text-sm font-bold uppercase
         flex gap-2 items-center justify-center
         p-4
         rounded
-        transition-colors`,
+        transition-colors disabled:opacity-50`,
         styles[variant],
       ].join(' ')}
     >
