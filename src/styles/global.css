@@ -10,3 +10,12 @@ body {
 a {
   @apply cursor-pointer;
 }
+
+.active-lesson-arrow {
+  @apply relative;
+}
+
+.active-lesson-arrow::before {
+  @apply content-[''] absolute right-[calc(100%-8px)] top-[calc(50%-8px)]
+    border-8 border-green-500 rotate-45;
+}
