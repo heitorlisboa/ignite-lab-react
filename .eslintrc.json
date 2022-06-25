@@ -28,7 +28,7 @@
         "newlinesBetween": "always",
         "groups": [
           "module",
-          "/^@/(?!(lib|utils|enums))/",
+          "/^@/(components|pages)/",
           "/^@//",
           ["parent", "sibling", "index"]
         ]
