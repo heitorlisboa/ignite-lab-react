@@ -1,6 +1,6 @@
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
 
 import { LogoIgniteLab } from '@/components/LogoIgniteLab';
 import { Button } from '@/components/Button';
@@ -16,7 +16,7 @@ type FormFields = {
   email: string;
 };
 
-export function Subscribe() {
+export default function SubscribePage() {
   const { register, handleSubmit } = useForm<FormFields>();
 
   const [createSubscriber, { loading: createSubLoading }] = useMutation(
@@ -27,13 +27,13 @@ export function Subscribe() {
   );
   const loading = createSubLoading || publishSubLoading;
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
   async function handleSubscribe({ name, email }: FormFields) {
     await createSubscriber({ variables: { name, email } });
     await publishSubscriber({ variables: { email } });
 
-    navigate('/event');
+    router.push('/event');
   }
 
   return (
