@@ -1241,7 +1241,7 @@ export type Lesson = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   scheduledIn: Array<ScheduledOperation>;
-  slug?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
   /** System stage field */
   stage: Stage;
   teacher?: Maybe<Teacher>;
@@ -1327,7 +1327,7 @@ export type LessonCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   lessonType: LessonType;
-  slug?: InputMaybe<Scalars['String']>;
+  slug: Scalars['String'];
   teacher?: InputMaybe<TeacherCreateOneInlineInput>;
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -5584,7 +5584,7 @@ export type PublishSubscriberMutation = { __typename?: 'Mutation', publishSubscr
 export type GetFirstLessonQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetFirstLessonQuery = { __typename?: 'Query', lessons: Array<{ __typename?: 'Lesson', slug?: string | null }> };
+export type GetFirstLessonQuery = { __typename?: 'Query', lessons: Array<{ __typename?: 'Lesson', slug: string }> };
 
 export type GetLessonBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -5596,7 +5596,7 @@ export type GetLessonBySlugQuery = { __typename?: 'Query', lesson?: { __typename
 export type GetLessonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLessonsQuery = { __typename?: 'Query', lessons: Array<{ __typename?: 'Lesson', id: string, title: string, slug?: string | null, lessonType: LessonType, availableAt?: any | null }> };
+export type GetLessonsQuery = { __typename?: 'Query', lessons: Array<{ __typename?: 'Lesson', id: string, title: string, slug: string, lessonType: LessonType, availableAt?: any | null }> };
 
 
 export const CreateSubscriberDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateSubscriber"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createSubscriber"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateSubscriberMutation, CreateSubscriberMutationVariables>;
