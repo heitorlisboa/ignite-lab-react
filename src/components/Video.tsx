@@ -1,73 +1,52 @@
-import { useQuery } from '@apollo/client';
-import { DefaultUi, Player, Youtube } from '@vime/react';
 import { DiscordLogo, FileArrowDown, Image, Lightning } from 'phosphor-react';
-
-import '@vime/core/themes/default.css';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Footer } from '@/components/Footer';
 
-import { GetLessonBySlugDocument } from '@/graphql/generated';
+import type { GetLessonBySlugQuery } from '@/graphql/generated';
 
 type VideoProps = {
-  lessonSlug: string;
+  lesson: NonNullable<GetLessonBySlugQuery['lesson']>;
 };
 
-export function Video({ lessonSlug }: VideoProps) {
-  const { data } = useQuery(GetLessonBySlugDocument, {
-    variables: { slug: lessonSlug },
-  });
-
-  if (!data) {
-    return (
-      <div className="flex-1">
-        <p>Carregando...</p>
-      </div>
-    );
-  }
-
-  if (!data.lesson) {
-    return (
-      <div className="flex-1">
-        <p>Aula não encontrada</p>
-      </div>
-    );
-  }
-
+export function Video({ lesson }: VideoProps) {
   return (
     <div className="flex-1 max-w-[68.75rem] mx-auto">
       <div className="bg-black">
         <div className="bg-gray-500 w-full h-full max-h-[60vh] mx-auto aspect-video">
-          <Player>
-            <Youtube videoId={data.lesson.videoId} />
+          {/* The vime player does not out of the box with Next.js, but I'm also
+          having other issues with it, so I'll replace it with another video
+          player library */}
+          {/* <Player>
+            <Youtube videoId={lesson.videoId} />
             <DefaultUi />
-          </Player>
+          </Player> */}
         </div>
       </div>
 
       <div className="p-8 mx-auto mb-12">
         <div className="flex gap-16 items-start mb-20">
           <div className="flex-1">
-            <h1 className="text-2xl font-bold mb-4">{data.lesson.title}</h1>
+            <h1 className="text-2xl font-bold mb-4">{lesson.title}</h1>
             <p className="text-gray-200 leading-relaxed mb-6">
-              {data.lesson.description}
+              {lesson.description}
             </p>
 
-            {data.lesson.teacher && (
+            {lesson.teacher && (
               <div className="flex items-center gap-4">
                 <img
                   className="w-16 h-16 border-2 border-blue-500 rounded-full"
-                  src={data.lesson.teacher.avatarURL}
+                  src={lesson.teacher.avatarURL}
                   alt="Foto do professor"
                 />
 
                 <div className="leading-relaxed">
                   <strong className="text-2xl font-bold">
-                    {data.lesson.teacher.name}
+                    {lesson.teacher.name}
                   </strong>
                   <span className="text-gray-200 text-sm block">
-                    {data.lesson.teacher.bio}
+                    {lesson.teacher.bio}
                   </span>
                 </div>
               </div>
