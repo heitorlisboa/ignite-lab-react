@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
@@ -38,6 +39,10 @@ export default function SubscribePage() {
 
   return (
     <>
+      <Head>
+        <title>Ignite Lab &ndash; React</title>
+      </Head>
+
       <main
         className="
         bg-blur bg-center-top bg-cover bg-no-repeat

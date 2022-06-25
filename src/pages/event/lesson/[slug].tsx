@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Header } from '@/components/Header';
@@ -22,13 +23,19 @@ export default function EventPage({
   allLessons,
 }: EventPageStaticProps) {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex flex-1">
-        <Video lesson={currentLesson} />
-        <Sidebar lessons={allLessons} />
-      </main>
-    </div>
+    <>
+      <Head>
+        <title>{currentLesson.title}</title>
+      </Head>
+
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex flex-1">
+          <Video lesson={currentLesson} />
+          <Sidebar lessons={allLessons} />
+        </main>
+      </div>
+    </>
   );
 }
 
