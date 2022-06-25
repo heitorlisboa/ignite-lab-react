@@ -13,7 +13,7 @@ export function Card({ children, title, Icon, href }: CardProps) {
       className="bg-gray-700 hover:bg-gray-600 flex rounded overflow-hidden transition-colors"
       href={href}
     >
-      <div className="bg-green-500 flex items-center justify-center px-8 py-12">
+      <div className="bg-green-700 flex items-center justify-center px-8 py-12">
         <Icon size={40} />
       </div>
       <div className="leading-relaxed p-6 my-auto">
