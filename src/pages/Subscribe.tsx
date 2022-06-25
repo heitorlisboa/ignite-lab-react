@@ -1,26 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
 import { LogoIgniteLab } from '@/components/LogoIgniteLab';
 import { Button } from '@/components/Button';
 import { Footer } from '@/components/Footer';
 
-const CREATE_SUBSCRIBER_MUTATION = gql`
-  mutation CreateSubscriber($name: String!, $email: String!) {
-    createSubscriber(data: { name: $name, email: $email }) {
-      id
-    }
-  }
-`;
-
-const PUBLISH_SUBSCRIBER_MUTATION = gql`
-  mutation PublishSubscriber($email: String!) {
-    publishSubscriber(where: { email: $email }) {
-      id
-    }
-  }
-`;
+import {
+  CreateSubscriberDocument,
+  PublishSubscriberDocument,
+} from '@/graphql/generated';
 
 type FormFields = {
   name: string;
@@ -31,10 +20,10 @@ export function Subscribe() {
   const { register, handleSubmit } = useForm<FormFields>();
 
   const [createSubscriber, { loading: createSubLoading }] = useMutation(
-    CREATE_SUBSCRIBER_MUTATION
+    CreateSubscriberDocument
   );
   const [publishSubscriber, { loading: publishSubLoading }] = useMutation(
-    PUBLISH_SUBSCRIBER_MUTATION
+    PublishSubscriberDocument
   );
   const loading = createSubLoading || publishSubLoading;
 

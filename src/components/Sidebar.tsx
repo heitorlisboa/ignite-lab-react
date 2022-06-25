@@ -1,33 +1,11 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import { Lesson } from '@/components/Lesson';
 
-import type { LessonType } from '@/enums/LessonType';
-
-type GetLessonsQueryResponse = {
-  lessons: {
-    id: string;
-    title: string;
-    slug: string;
-    lessonType: keyof typeof LessonType;
-    availableAt: string;
-  }[];
-};
-
-const GET_LESSONS_QUERY = gql`
-  query {
-    lessons(orderBy: availableAt_ASC, stage: PUBLISHED) {
-      id
-      title
-      slug
-      lessonType
-      availableAt
-    }
-  }
-`;
+import { GetLessonsDocument } from '@/graphql/generated';
 
 export function Sidebar() {
-  const { data } = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY);
+  const { data } = useQuery(GetLessonsDocument);
 
   return (
     <aside className="bg-gray-700 w-[21.75rem] p-6 border-l border-gray-500">
@@ -40,7 +18,11 @@ export function Sidebar() {
           <Lesson
             key={id}
             title={title}
-            slug={slug}
+            /* Temporarily using non-null assertion as GraphCMS is not working
+            properly at the moment, so I can't change the schema to make this
+            field required */
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            slug={slug!}
             type={lessonType}
             availableAt={new Date(availableAt)}
           />

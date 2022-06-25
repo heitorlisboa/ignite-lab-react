@@ -1,24 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 
 import { Header } from '@/components/Header';
 import { Video } from '@/components/Video';
 import { Sidebar } from '@/components/Sidebar';
 
-const GET_FIRST_LESSON_QUERY = gql`
-  query GetFirstLesson {
-    lessons(orderBy: availableAt_ASC, stage: PUBLISHED, first: 1) {
-      slug
-    }
-  }
-`;
-
-type GetFirstLessonQueryResponse = {
-  lessons: {
-    slug: string;
-  }[];
-};
+import { GetFirstLessonDocument } from '@/graphql/generated';
 
 type Params = {
   slug: string;
@@ -26,19 +14,15 @@ type Params = {
 
 export function Event() {
   const { slug } = useParams<Params>();
-  const navigateFunction = useNavigate();
-  const [getFirstLesson] = useLazyQuery<GetFirstLessonQueryResponse>(
-    GET_FIRST_LESSON_QUERY
-  );
+  const navigate = useNavigate();
+  const [getFirstLesson] = useLazyQuery(GetFirstLessonDocument);
 
   useEffect(() => {
     if (!slug) {
       getFirstLesson().then(({ data }) => {
         if (data) {
           const firstLessonSlug = data.lessons[0].slug;
-          navigateFunction(`/event/lesson/${firstLessonSlug}`, {
-            replace: true,
-          });
+          navigate(`/event/lesson/${firstLessonSlug}`);
         }
       });
     }
