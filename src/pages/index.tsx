@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 
 import { LogoIgniteLab } from '@/components/LogoIgniteLab';
 import { Button } from '@/components/Button';
@@ -9,6 +9,7 @@ import { Footer } from '@/components/Footer';
 
 import {
   CreateSubscriberDocument,
+  GetFirstLessonDocument,
   PublishSubscriberDocument,
 } from '@/graphql/generated';
 
@@ -26,6 +27,7 @@ export default function SubscribePage() {
   const [publishSubscriber, { loading: publishSubLoading }] = useMutation(
     PublishSubscriberDocument
   );
+  const [getFirstLesson] = useLazyQuery(GetFirstLessonDocument);
   const loading = createSubLoading || publishSubLoading;
 
   const router = useRouter();
@@ -34,7 +36,16 @@ export default function SubscribePage() {
     await createSubscriber({ variables: { name, email } });
     await publishSubscriber({ variables: { email } });
 
-    router.push('/event');
+    const { data } = await getFirstLesson();
+    const firstLesson = data?.lessons[0];
+
+    if (!firstLesson) {
+      return alert(
+        'Obrigado por fazer sua inscrição! Você será avisado no seu email quando a primeira aula for liberada.'
+      );
+    }
+
+    router.push(`/event/lesson/${firstLesson.slug}`);
   }
 
   return (
