@@ -14,15 +14,14 @@ export function Video({ lesson }: VideoProps) {
   return (
     <div className="flex-1 max-w-[68.75rem] mx-auto">
       <div className="bg-black">
-        <div className="bg-gray-500 w-full h-full max-h-[60vh] mx-auto aspect-video">
-          {/* The vime player does not out of the box with Next.js, but I'm also
-          having other issues with it, so I'll replace it with another video
-          player library */}
-          {/* <Player>
-            <Youtube videoId={lesson.videoId} />
-            <DefaultUi />
-          </Player> */}
-        </div>
+        <iframe
+          className="w-full h-full max-h-[60vh] aspect-video"
+          src={`https://www.youtube-nocookie.com/embed/${lesson.videoId}`}
+          title="YouTube video player"
+          frameBorder={0}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       </div>
 
       <div className="p-8 mx-auto mb-12">
