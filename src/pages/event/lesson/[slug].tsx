@@ -111,5 +111,6 @@ export const getStaticProps: GetStaticProps<
       currentLesson,
       allLessons,
     },
+    revalidate: 60 * 10, // 10 minutes
   };
 };
