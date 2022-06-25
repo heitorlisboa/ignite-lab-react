@@ -1,6 +1,8 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 
+import { LoadingScreen } from '@/components/LoadingScreen';
 import { Header } from '@/components/Header';
 import { Video } from '@/components/Video';
 import { Sidebar } from '@/components/Sidebar';
@@ -22,6 +24,12 @@ export default function EventPage({
   currentLesson,
   allLessons,
 }: EventPageStaticProps) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <LoadingScreen />;
+  }
+
   return (
     <>
       <Head>
