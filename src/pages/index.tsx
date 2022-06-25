@@ -45,17 +45,17 @@ export default function SubscribePage() {
 
       <main
         className="
-        bg-blur bg-center-top bg-cover bg-no-repeat
-        grid justify-items-center
-        min-h-screen
-        !pb-0 sm:p-12 md:18 lg:p-20 xl:p-28
-      "
+          bg-blur bg-center-top bg-cover bg-no-repeat
+          grid justify-items-center
+          min-h-screen
+          !pb-0 sm:p-12 md:18 lg:p-20 xl:p-28
+        "
       >
         <div
           className="
-          flex flex-col gap-8 items-center justify-between xl:flex-row xl:gap-[12.5rem]
-          max-w-[50rem] xl:max-w-[76rem]
-        "
+            flex flex-col gap-8 items-center justify-between xl:flex-row xl:gap-[12.5rem]
+            max-w-[50rem] xl:max-w-[76rem]
+          "
         >
           <div className="px-6 pt-10 sm:p-0">
             <LogoIgniteLab className="max-h-7 mb-8" />
@@ -74,7 +74,13 @@ export default function SubscribePage() {
             </p>
           </div>
 
-          <div className="bg-gray-700 w-full sm:w-auto sm:min-w-[30rem] xl:min-w-[24.5rem] p-8 border border-gray-500 rounded">
+          <div
+            className="
+              bg-gray-700
+              w-full sm:w-auto sm:min-w-[30rem] xl:min-w-[24.5rem]
+              p-8 border border-gray-500 rounded
+            "
+          >
             <strong className="text-2xl block mb-6">
               Inscreva-se gratuitamente
             </strong>
