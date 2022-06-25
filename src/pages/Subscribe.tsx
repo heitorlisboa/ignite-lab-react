@@ -123,11 +123,7 @@ export function Subscribe() {
           </div>
         </div>
 
-        <img
-          className="mt-auto"
-          src="/src/assets/code-mockup-desktop.png"
-          alt=""
-        />
+        <img className="mt-auto" src="/assets/code-mockup.png" alt="" />
       </main>
 
       <Footer />
