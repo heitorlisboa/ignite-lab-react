@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { format, isPast } from 'date-fns';
+import ptBr from 'date-fns/locale/pt-BR';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 
 import { LoadingScreen } from '@/components/LoadingScreen';
@@ -29,6 +31,8 @@ export default function EventPage({
   if (router.isFallback) {
     return <LoadingScreen />;
   }
+  const availableAt = new Date(currentLesson.availableAt);
+  const isCurrentLessonAvailable = isPast(availableAt);
 
   return (
     <>
@@ -38,10 +42,23 @@ export default function EventPage({
 
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex flex-1">
-          <Video lesson={currentLesson} />
-          <Sidebar lessons={allLessons} />
-        </main>
+        {isCurrentLessonAvailable ? (
+          <main className="flex flex-1">
+            <Video lesson={currentLesson} />
+            <Sidebar lessons={allLessons} />
+          </main>
+        ) : (
+          <div className="flex flex-1 items-center justify-center">
+            <strong className="text-2xl text-center p-8">
+              Aula disponível a partir de{' '}
+              <time dateTime={availableAt.toISOString()}>
+                {format(availableAt, "d' de 'MMMM' às 'k'h'mm", {
+                  locale: ptBr,
+                })}
+              </time>
+            </strong>
+          </div>
+        )}
       </div>
     </>
   );
