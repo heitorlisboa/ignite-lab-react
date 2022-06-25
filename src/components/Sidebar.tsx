@@ -18,11 +18,7 @@ export function Sidebar() {
           <Lesson
             key={id}
             title={title}
-            /* Temporarily using non-null assertion as GraphCMS is not working
-            properly at the moment, so I can't change the schema to make this
-            field required */
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            slug={slug!}
+            slug={slug}
             type={lessonType}
             availableAt={new Date(availableAt)}
           />
