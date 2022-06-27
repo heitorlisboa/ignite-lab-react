@@ -10,6 +10,7 @@ import { Footer } from '@/components/Footer';
 import {
   CreateSubscriberDocument,
   GetFirstLessonDocument,
+  GetSubscriberByEmailDocument,
   PublishSubscriberDocument,
 } from '@/graphql/generated';
 
@@ -23,6 +24,7 @@ export default function SubscribePage() {
   const { register, handleSubmit } = useForm<FormFields>();
 
   // GraphQL queries and mutations
+  const [getSubscriberByEmail] = useLazyQuery(GetSubscriberByEmailDocument);
   const [createSubscriber, { loading: createSubLoading }] = useMutation(
     CreateSubscriberDocument
   );
@@ -38,11 +40,34 @@ export default function SubscribePage() {
   const router = useRouter();
 
   async function handleSubscribe({ name, email }: FormFields) {
-    await createSubscriber({ variables: { name, email } });
-    await publishSubscriber({ variables: { email } });
+    let emailAlreadySubscribed = false;
 
-    const { data } = await getFirstLesson();
-    const firstLesson = data?.lessons[0];
+    // Checking if the email is already subscribed
+    const { data: subscriberData } = await getSubscriberByEmail({
+      variables: { email },
+    });
+    const subscriber = subscriberData?.subscriber;
+
+    if (subscriber) {
+      emailAlreadySubscribed = true;
+    }
+
+    // If it is subscribed, then subscribe it
+    if (emailAlreadySubscribed) {
+      return alert('Email já cadastrado!');
+    }
+
+    // Subscribing the user
+    try {
+      await createSubscriber({ variables: { name, email } });
+      await publishSubscriber({ variables: { email } });
+    } catch (error) {
+      return alert('Erro ao fazer sua inscrição, tente novamente mais tarde');
+    }
+
+    // Checking if there is already a first lesson
+    const { data: firstLessonData } = await getFirstLesson();
+    const firstLesson = firstLessonData?.lessons[0];
 
     /* If there's no lesson, there's nowhere to redirect, so I'll just alert the
     user that they will be notified when the first lesson is released */
