@@ -45,10 +45,6 @@ export default function EventPage({
     return <LoadingScreen />;
   }
 
-  // Checking if the lesson is available
-  const availableAt = new Date(currentLesson.availableAt);
-  const isCurrentLessonAvailable = isPast(availableAt);
-
   return (
     <MobileSidebarProvider
       value={{ isSidebarOpen, toggleMobileSidebar, sidebarId: 'sidebar' }}
@@ -58,24 +54,11 @@ export default function EventPage({
       </Head>
 
       <div className="flex flex-col h-screen">
-        <Header withSidebar={isCurrentLessonAvailable} />
-        {isCurrentLessonAvailable ? (
-          <main className="lg:grid lg:grid-cols-[1fr,23rem] overflow-hidden">
-            <Video lesson={currentLesson} />
-            <Sidebar lessons={allLessons} />
-          </main>
-        ) : (
-          <div className="flex flex-1 items-center justify-center">
-            <strong className="text-2xl text-center p-8">
-              Aula disponível a partir de{' '}
-              <time dateTime={availableAt.toISOString()}>
-                {format(availableAt, "d' de 'MMMM' às 'k'h'mm", {
-                  locale: ptBr,
-                })}
-              </time>
-            </strong>
-          </div>
-        )}
+        <Header />
+        <main className="lg:grid lg:grid-cols-[1fr,23rem] overflow-hidden">
+          <Video lesson={currentLesson} />
+          <Sidebar lessons={allLessons} />
+        </main>
       </div>
     </MobileSidebarProvider>
   );

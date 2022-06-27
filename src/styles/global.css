@@ -23,6 +23,10 @@
       border-8 border-green-500 rotate-45;
   }
 
+  .lesson-arrow-orange::before {
+    @apply border-orange-500;
+  }
+
   .resize-animation-stopper * {
     @apply !animate-none !transition-none;
   }

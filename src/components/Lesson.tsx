@@ -41,7 +41,10 @@ export function Lesson({ title, slug, type, availableAt }: LessonProps) {
       <Link href={`/event/lesson/${slug}`} passHref>
         <a
           className={classNames('block p-4 border rounded', {
-            'bg-green-500 border-green-500 active-lesson-arrow': isActiveLesson,
+            'bg-green-500 border-green-500 active-lesson-arrow':
+              isActiveLesson && isLessonAvailable,
+            'bg-orange-500 border-orange-500 active-lesson-arrow lesson-arrow-orange':
+              isActiveLesson && !isLessonAvailable,
             'border-gray-500 hover:border-green-500': !isActiveLesson,
           })}
         >
@@ -60,7 +63,15 @@ export function Lesson({ title, slug, type, availableAt }: LessonProps) {
                 Conteúdo liberado
               </span>
             ) : (
-              <span className="text-orange-500 text-sm font-medium flex gap-2 items-center">
+              <span
+                className={classNames(
+                  'text-sm font-medium flex gap-2 items-center',
+                  {
+                    'text-white': isActiveLesson,
+                    'text-orange-500': !isActiveLesson,
+                  }
+                )}
+              >
                 <Lock size={20} />
                 Em breve
               </span>

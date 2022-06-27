@@ -11,6 +11,5 @@ query GetLessonBySlug($slug: String!) {
     challenge {
       url
     }
-    availableAt
   }
 }
