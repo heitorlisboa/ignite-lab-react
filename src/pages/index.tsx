@@ -19,8 +19,10 @@ type FormFields = {
 };
 
 export default function SubscribePage() {
+  // Event subscription form
   const { register, handleSubmit } = useForm<FormFields>();
 
+  // GraphQL queries and mutations
   const [createSubscriber, { loading: createSubLoading }] = useMutation(
     CreateSubscriberDocument
   );
@@ -28,8 +30,11 @@ export default function SubscribePage() {
     PublishSubscriberDocument
   );
   const [getFirstLesson] = useLazyQuery(GetFirstLessonDocument);
+
+  // Loading state for when the user clicks the subscribe button
   const loading = createSubLoading || publishSubLoading;
 
+  // The form submit handler
   const router = useRouter();
 
   async function handleSubscribe({ name, email }: FormFields) {
@@ -39,12 +44,15 @@ export default function SubscribePage() {
     const { data } = await getFirstLesson();
     const firstLesson = data?.lessons[0];
 
+    /* If there's no lesson, there's nowhere to redirect, so I'll just alert the
+    user that they will be notified when the first lesson is released */
     if (!firstLesson) {
       return alert(
         'Obrigado por fazer sua inscrição! Você será avisado no seu email quando a primeira aula for liberada.'
       );
     }
 
+    // If the first lesson exists, then I'll redirect the user to it
     router.push(`/event/lesson/${firstLesson.slug}`);
   }
 
