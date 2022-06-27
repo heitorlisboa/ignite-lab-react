@@ -61,11 +61,20 @@ export function Video({ lesson }: VideoProps) {
           </div>
 
           <div className="flex flex-col gap-4 w-full max-w-md mx-auto md:w-auto lg:w-full xl:w-auto">
-            <Button as="a" variant="filled" href="#">
+            <Button
+              as="a"
+              variant="filled"
+              href="https://discord-service.rocketseat.dev/signin/ignite-lab"
+              openNewTab
+            >
               <DiscordLogo size={24} />
               <span>Comunidade no discord</span>
             </Button>
-            <Button as="a" variant="outlined" href="#">
+            <Button
+              as="a"
+              variant="outlined"
+              href={lesson.challenge?.url || '#'}
+            >
               <Lightning size={24} />
               <span>Acesse o desafio</span>
             </Button>
@@ -73,10 +82,18 @@ export function Video({ lesson }: VideoProps) {
         </div>
 
         <div className="grid gap-8 xl:grid-cols-2 justify-center md:justify-start lg:justify-center">
-          <Card title="Material complementar" Icon={FileArrowDown} href="#">
+          <Card
+            title="Material complementar"
+            Icon={FileArrowDown}
+            href="https://efficient-sloth-d85.notion.site/Material-complementar-86d4ef35af16471ebc3ae3eba1a378e5"
+          >
             Acesse o material complementar para acelerar o seu desenvolvimento
           </Card>
-          <Card title="Wallpapers exclusivos" Icon={Image} href="#">
+          <Card
+            title="Wallpapers exclusivos"
+            Icon={Image}
+            href="https://drive.google.com/drive/folders/1mxWnvlqmH7MbVRv2Na9xFNgCQCygM1iR"
+          >
             Baixe wallpapers exclusivos do Ignite Lab e personalize a sua
             máquina
           </Card>

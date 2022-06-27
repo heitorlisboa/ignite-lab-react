@@ -8,6 +8,9 @@ query GetLessonBySlug($slug: String!) {
       avatarURL
       bio
     }
+    challenge {
+      url
+    }
     availableAt
   }
 }

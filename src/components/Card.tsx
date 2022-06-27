@@ -16,6 +16,8 @@ export function Card({ children, title, Icon, href }: CardProps) {
         rounded overflow-hidden transition-colors
       "
       href={href}
+      target="_blank"
+      rel="noreferrer"
     >
       <div className="bg-green-700 flex items-center justify-center px-5 sm:px-8 py-12">
         <Icon size={40} />

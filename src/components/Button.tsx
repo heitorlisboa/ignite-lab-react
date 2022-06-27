@@ -4,6 +4,7 @@ type ButtonProps = PropsWithChildren<{
   as?: 'a' | 'button';
   variant?: 'filled' | 'outlined';
   href?: string;
+  openNewTab?: boolean;
   buttonType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   buttonDisabled?: boolean;
 }>;
@@ -17,6 +18,7 @@ export function Button({
   as: Element = 'button',
   variant = 'filled',
   href,
+  openNewTab,
   buttonType = 'button',
   buttonDisabled,
 }: ButtonProps) {
@@ -36,6 +38,8 @@ export function Button({
       href={Element === 'a' ? href : undefined}
       type={Element === 'button' ? buttonType : undefined}
       disabled={Element === 'button' ? buttonDisabled : undefined}
+      target={openNewTab ? '_blank' : undefined}
+      rel={openNewTab ? 'noreferrer' : undefined}
       className={[
         `text-sm font-bold uppercase
         flex gap-2 items-center justify-center
