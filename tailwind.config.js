@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line no-undef
 module.exports = {
-  content: ['./src/**/*.tsx'],
+  content: ['./src/**/*.tsx', './src/hooks/*.{ts,tsx}'],
   theme: {
     extend: {
       backgroundImage: {
@@ -9,6 +9,9 @@ module.exports = {
       },
       backgroundPosition: {
         'center-top': 'center top',
+      },
+      screens: {
+        xs: '320px',
       },
       fontFamily: {
         sans: 'Roboto, sans-serif',

@@ -2,20 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-900 text-gray-100;
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  body {
+    @apply bg-gray-900 text-gray-100;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    @apply cursor-pointer;
+  }
 }
 
-a {
-  @apply cursor-pointer;
-}
+@layer utilities {
+  .active-lesson-arrow {
+    @apply relative;
+  }
 
-.active-lesson-arrow {
-  @apply relative;
-}
+  .active-lesson-arrow::before {
+    @apply content-[''] absolute right-[calc(100%-8px)] top-[calc(50%-8px)]
+      border-8 border-green-500 rotate-45;
+  }
 
-.active-lesson-arrow::before {
-  @apply content-[''] absolute right-[calc(100%-8px)] top-[calc(50%-8px)]
-    border-8 border-green-500 rotate-45;
+  .resize-animation-stopper * {
+    @apply !animate-none !transition-none;
+  }
 }

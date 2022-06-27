@@ -69,8 +69,13 @@ export default function SubscribePage() {
           "
         >
           <div className="px-6 pt-10 sm:p-0">
-            <LogoIgniteLab className="max-h-7 mb-8" />
-            <h1 className="text-[2.5rem] leading-tight mb-6">
+            <LogoIgniteLab className="max-h-7 mb-6 mx-auto sm:mb-8 sm:mx-0" />
+            <h1
+              className="
+                text-[clamp(2rem,2.5vw+1rem,2.5rem)] leading-tight
+                text-center sm:text-left mb-6
+              "
+            >
               Construa uma{' '}
               <strong className="text-blue-500 font-medium">
                 aplicação completa
@@ -78,7 +83,7 @@ export default function SubscribePage() {
               , do zero, com{' '}
               <strong className="text-blue-500 font-medium">React</strong>
             </h1>
-            <p className="text-gray-200 leading-relaxed">
+            <p className="text-gray-200 text-sm leading-relaxed text-center sm:text-base sm:text-left">
               Em apenas uma semana você vai dominar na prática uma das
               tecnologias mais utilizadas e com alta demanda para acessar as
               melhores oportunidades do mercado.

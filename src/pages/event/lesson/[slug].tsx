@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { format, isPast } from 'date-fns';
 import ptBr from 'date-fns/locale/pt-BR';
 import type { GetStaticPaths, GetStaticProps } from 'next';
@@ -9,6 +10,8 @@ import { Header } from '@/components/Header';
 import { Video } from '@/components/Video';
 import { Sidebar } from '@/components/Sidebar';
 
+import { MobileSidebarProvider } from '@/contexts/mobile-sidebar-context';
+import { useResizeAnimationStopper } from '@/hooks/use-resize-animation-stopper';
 import { client } from '@/lib/apollo';
 import {
   GetLessonBySlugDocument,
@@ -26,24 +29,38 @@ export default function EventPage({
   currentLesson,
   allLessons,
 }: EventPageStaticProps) {
+  // Mobile sidebar stuff
+  useResizeAnimationStopper();
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  function toggleMobileSidebar() {
+    setIsSidebarOpen((prevState) => !prevState);
+  }
+
+  // Next.js ISR fallback
   const router = useRouter();
 
   if (router.isFallback) {
     return <LoadingScreen />;
   }
+
+  // Checking if the lesson is available
   const availableAt = new Date(currentLesson.availableAt);
   const isCurrentLessonAvailable = isPast(availableAt);
 
   return (
-    <>
+    <MobileSidebarProvider
+      value={{ isSidebarOpen, toggleMobileSidebar, sidebarId: 'sidebar' }}
+    >
       <Head>
         <title>{currentLesson.title}</title>
       </Head>
 
-      <div className="flex flex-col min-h-screen">
-        <Header />
+      <div className="flex flex-col h-screen">
+        <Header withSidebar={isCurrentLessonAvailable} />
         {isCurrentLessonAvailable ? (
-          <main className="flex flex-1">
+          <main className="lg:grid lg:grid-cols-[1fr,23rem] overflow-hidden">
             <Video lesson={currentLesson} />
             <Sidebar lessons={allLessons} />
           </main>
@@ -60,7 +77,7 @@ export default function EventPage({
           </div>
         )}
       </div>
-    </>
+    </MobileSidebarProvider>
   );
 }
 
